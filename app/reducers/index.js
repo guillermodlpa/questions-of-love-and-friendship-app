@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import {
   ACTIVE_VIEW_CHANGED,
   QUESTIONS_LOADED,
+  CURRENT_DECK_SLIDE_CHANGED,
 } from '../constants/actionTypes';
 import { WELCOME } from '../constants/viewNames';
 
@@ -12,6 +13,10 @@ const activeView = (state = WELCOME, action) => (
 
 const questions = (state = [], action) => (
   action.type === QUESTIONS_LOADED ? action.questions : state
+);
+
+const currentDeckSlide = (state = 0, action) => (
+  action.type === CURRENT_DECK_SLIDE_CHANGED ? action.value : state
 );
 
 /**
@@ -26,4 +31,5 @@ const questions = (state = [], action) => (
 export default combineReducers({
   activeView,
   questions,
+  currentDeckSlide,
 });

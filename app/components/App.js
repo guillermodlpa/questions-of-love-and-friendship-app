@@ -20,7 +20,10 @@ import questionsData from '../data/questions';
 const styles = StyleSheet.create({
   app: {
     flex: 1,
-    padding: 30,
+    paddingTop: 30,
+    paddingBottom: 30,
+    paddingLeft: 10,
+    paddingRight: 10,
     alignSelf: 'center',
   },
   mainView: {
@@ -34,23 +37,29 @@ export default class App extends Component {
       /* actions */
       setActiveView: PropTypes.func.isRequired,
       setQuestions: PropTypes.func.isRequired,
+      setCurrentDeckSlide: PropTypes.func.isRequired,
       /* reducers */
       activeView: PropTypes.string.isRequired,
       questions: PropTypes.array.isRequired,
+      currentDeckSlide: PropTypes.number.isRequired,
     };
   }
 
   constructor(props) {
     super(props);
-    this.onStart = this.onStart.bind(this);
+    this.goDeckView = this.goDeckView.bind(this);
+    this.goWelcomeView = this.goWelcomeView.bind(this);
   }
 
   componentDidMount() {
     this.props.setQuestions(questionsData);
   }
 
-  onStart = () => {
+  goDeckView = () => {
     this.props.setActiveView(DECK);
+  }
+  goWelcomeView = () => {
+    this.props.setActiveView(WELCOME);
   }
 
   render() {
@@ -65,7 +74,7 @@ export default class App extends Component {
       case WELCOME:
         view = (
           <WelcomeView
-            onStart={this.onStart}
+            onStart={this.goDeckView}
           />
         );
         break;
@@ -80,6 +89,9 @@ export default class App extends Component {
         view = (
           <DeckView
             questions={questions}
+            onEnd={this.goWelcomeView}
+            setCurrentDeckSlide={this.props.setCurrentDeckSlide}
+            currentDeckSlide={this.props.currentDeckSlide}
           />
         );
         break;
