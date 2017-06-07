@@ -1,0 +1,15 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "no-plusplus": "off",
+        "no-continue": "off",
+        "no-param-reassign": "off",
+        "no-mixed-operators": ["error", {
+            "allowSamePrecedence": true
+        }],
+        "import/extensions": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/prefer-stateless-function": 1,
+        "no-use-before-define": 1
+    }
+}
