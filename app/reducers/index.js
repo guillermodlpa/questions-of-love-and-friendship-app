@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 
-const count = (state = 0, action) => {
-  console.log('count', state, action);
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
-    case 'RESET':
-      return 0;
-    default:
-      return state;
-  }
-};
+import {
+  ACTIVE_VIEW_CHANGED,
+  QUESTIONS_LOADED,
+} from '../constants/actionTypes';
+import { WELCOME } from '../constants/viewNames';
+
+const activeView = (state = WELCOME, action) => (
+  action.type === ACTIVE_VIEW_CHANGED ? action.value : state
+);
+
+const questions = (state = [], action) => (
+  action.type === QUESTIONS_LOADED ? action.questions : state
+);
 
 /**
  * Combined Reducers
@@ -24,5 +24,6 @@ const count = (state = 0, action) => {
  */
 
 export default combineReducers({
-  count,
+  activeView,
+  questions,
 });

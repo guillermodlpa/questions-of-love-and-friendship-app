@@ -6,24 +6,14 @@ import {
 import { Provider } from 'react-redux';
 
 import store from './store';
-import AppContainer from './containers/AppContainer.js';
+import AppContainer from './containers/app';
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          <AppContainer />
-        </View>
+        <AppContainer />
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

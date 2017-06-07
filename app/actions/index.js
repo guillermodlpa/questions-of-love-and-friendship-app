@@ -1,17 +1,14 @@
 import {
-  INCREMENT,
-  DECREMENT,
-  RESET,
+  ACTIVE_VIEW_CHANGED,
+  QUESTIONS_LOADED,
 } from '../constants/actionTypes';
 
-export const increment = () => ({
-  type: INCREMENT,
+export const setActiveView = value => ({
+  type: ACTIVE_VIEW_CHANGED,
+  value,
 });
 
-export const decrement = () => ({
-  type: DECREMENT,
-});
-
-export const reset = () => ({
-  type: RESET,
+export const setQuestions = questions => ({
+  type: QUESTIONS_LOADED,
+  questions,
 });

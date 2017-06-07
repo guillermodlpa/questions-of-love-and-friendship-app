@@ -1,3 +1,2 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const RESET = 'RESET';
+export const ACTIVE_VIEW_CHANGED = 'ACTIVE_VIEW_CHANGED';
+export const QUESTIONS_LOADED = 'QUESTIONS_LOADED';
