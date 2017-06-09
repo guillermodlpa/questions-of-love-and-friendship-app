@@ -4,8 +4,9 @@ import {
   Text,
   View,
   StyleSheet,
-  Button,
 } from 'react-native';
+
+import GButton from './GButton';
 
 const styles = StyleSheet.create({
   outer: {
@@ -16,8 +17,10 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     flexGrow: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
+
     borderRadius: 30,
     borderWidth: 10,
     borderColor: '#adadad',
@@ -34,8 +37,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#555555',
     borderRadius: 30,
   },
+  copyContainer: {
+    flexGrow: 1,
+  },
+  footer: {
+    width: '100%',
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   copy: {
     fontSize: 20,
+  },
+  left: {
+    alignSelf: 'flex-start',
+  },
+  right: {
+    alignSelf: 'flex-end',
+  },
+  pageButtonView: {},
+  pageButtonText: {
+    fontSize: 60,
   },
 });
 
@@ -44,30 +66,53 @@ export default class extends Component {
     copy: PropTypes.string.isRequired,
     next: PropTypes.func.isRequired,
     prev: PropTypes.func.isRequired,
+    isFirst: PropTypes.bool.isRequired,
+    isLast: PropTypes.bool.isRequired,
   }
 
   render() {
     const {
       next,
       prev,
+      isFirst,
+      isLast,
       copy,
     } = this.props;
+
+    const prevButton = !isFirst && (
+      <GButton
+        title="<"
+        onPress={prev}
+        textStyle={styles.pageButtonText}
+        viewStyle={styles.pageButtonView}
+      />
+    );
+    const nextButton = !isLast && (
+      <GButton
+        title=">"
+        onPress={next}
+        textStyle={styles.pageButtonText}
+        viewStyle={styles.pageButtonView}
+      />
+    );
 
     return (
       <View style={styles.outer} >
         <View style={styles.shadow} />
         <View style={styles.contentContainer} >
-          <Text style={styles.copy}>
-            {copy}
-          </Text>
-          <Button
-            title="<"
-            onPress={prev}
-          />
-          <Button
-            title=">"
-            onPress={next}
-          />
+          <View style={styles.copyContainer}>
+            <Text style={styles.copy}>
+              {copy}
+            </Text>
+          </View>
+          <View style={styles.footer}>
+            <View style={styles.left}>
+              {prevButton}
+            </View>
+            <View style={styles.right}>
+              {nextButton}
+            </View>
+          </View>
         </View>
       </View>
     );

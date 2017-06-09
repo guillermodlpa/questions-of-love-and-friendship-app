@@ -3,9 +3,10 @@ import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
-  Button,
   View,
 } from 'react-native';
+
+import GButton from './GButton';
 
 const styles = StyleSheet.create({
   main: {
@@ -38,10 +39,9 @@ export default class App extends Component {
         <Text>
           Questions of Love and Friendship
         </Text>
-        <Button
+        <GButton
           onPress={this.onStartButtonTrigger}
           title="Start"
-          accessibilityLabel="Start"
         />
       </View>
     );

@@ -9,13 +9,11 @@ import {
 const styles = StyleSheet.create({
   carousel: {
     flex: 1,
+    flexGrow: 1,
   },
   carouselContentContainer: {
   },
   carouselPage: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
   },
 });
@@ -24,15 +22,14 @@ export default class extends Component {
   static propTypes = {
     slides: PropTypes.arrayOf(PropTypes.element).isRequired,
     currentSlideIndex: PropTypes.number.isRequired,
+    onSlideScroll: PropTypes.func,
+  }
+  static defaultProps = {
+    onSlideScroll: () => {},
   }
 
   constructor(props) {
     super(props);
-
-    this.onScrollViewLayout = this.onScrollViewLayout.bind(this);
-    this.setScrollViewRef = this.setScrollViewRef.bind(this);
-    this.onScroll = this.onScroll.bind(this);
-
     this.state = {
       width: 100,
       height: 100,
@@ -41,13 +38,16 @@ export default class extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.currentSlideIndex !== this.props.currentSlideIndex) {
-      console.log('currentSlideIndex', prevProps, this.props);
       this.scrollToSlide(this.props.currentSlideIndex);
     }
   }
 
   onScroll = (event) => {
-    console.log(event);
+    const offset = event.nativeEvent.contentOffset.x;
+    const slideWidth = this.state.width;
+    const slideIndex = Math.round(offset / slideWidth);
+
+    this.props.onSlideScroll(slideIndex);
   }
 
   onScrollViewLayout = (event) => {
@@ -94,7 +94,8 @@ export default class extends Component {
         bounces={false}
         styles={styles.carousel}
         onLayout={this.onScrollViewLayout}
-        onScroll{this.onScroll}
+        onScroll={this.onScroll}
+        scrollEventThrottle={0}
         contentContainerStyle={styles.carouselContentContainer}
       >
         {slideViews}

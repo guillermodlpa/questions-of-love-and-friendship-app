@@ -14,6 +14,7 @@ import QuestionCardEnd from './QuestionCardEnd';
 const styles = StyleSheet.create({
   outer: {
     flex: 1,
+    flexGrow: 1,
   },
   header: {
     flexDirection: 'row',
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
   leaveButton: {
   },
   carousel: {
+    flex: 1,
     flexGrow: 1,
   },
 });
@@ -36,13 +38,9 @@ export default class extends Component {
     currentDeckSlide: PropTypes.number.isRequired,
   }
 
-  constructor(...args) {
-    super(...args);
-
-    this.nextSlide = this.nextSlide.bind(this);
-    this.prevSlide = this.prevSlide.bind(this);
+  onSlideScroll = (slideIndex) => {
+    this.props.setCurrentDeckSlide(slideIndex);
   }
-
   nextSlide = () => {
     const index = this.props.currentDeckSlide + 1;
     this.props.setCurrentDeckSlide(index);
@@ -59,10 +57,12 @@ export default class extends Component {
       currentDeckSlide,
     } = this.props;
 
-    const questionViews = questions.map(question => (
+    const questionViews = questions.map((question, index) => (
       <QuestionCard
         next={this.nextSlide}
         prev={this.prevSlide}
+        isFirst={index === 0}
+        isLast={false}
         {...question}
       />
     ));
@@ -75,7 +75,7 @@ export default class extends Component {
     return (
       <View style={styles.outer}>
         <View style={styles.header}>
-          <Text>{currentDeckSlide}/{questions.length}</Text>
+          <Text>{currentDeckSlide + 1}/{questions.length}</Text>
           <Button
             style={styles.leaveButton}
             title="X"
@@ -86,6 +86,7 @@ export default class extends Component {
           style={styles.carousel}
           slides={questionViews}
           currentSlideIndex={currentDeckSlide}
+          onSlideScroll={this.onSlideScroll}
         />
       </View>
     );
