@@ -2,16 +2,15 @@
 import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
-  Text,
-  View,
 } from 'react-native';
 
-import GButton from './GButton';
+import GButton from './lib/GButton';
+import GView from './lib/GView';
+import GText from './lib/GText';
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    justifyContent: 'center',
   },
 });
 
@@ -22,28 +21,25 @@ export default class App extends Component {
     };
   }
 
-  constructor(props) {
-    super(props);
-    this.onStartButtonTrigger = this.onStartButtonTrigger.bind(this);
-  }
-
   onStartButtonTrigger = () => {
     this.props.onStart();
   }
 
   render() {
     return (
-      <View
-        style={styles.main}
-      >
-        <Text>
-          Questions of Love and Friendship
-        </Text>
-        <GButton
-          onPress={this.onStartButtonTrigger}
-          title="Start"
-        />
-      </View>
+      <GView style={styles.main} centerContents>
+        <GView pad>
+          <GText txtC headline>
+            Questions of Love and Friendship
+          </GText>
+        </GView>
+        <GView pad>
+          <GButton
+            onPress={this.onStartButtonTrigger}
+            title="Start"
+          />
+        </GView>
+      </GView>
     );
   }
 }

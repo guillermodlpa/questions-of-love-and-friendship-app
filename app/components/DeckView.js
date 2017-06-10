@@ -1,11 +1,12 @@
 
 import React, { Component, PropTypes } from 'react';
 import {
-  Button,
-  View,
   StyleSheet,
-  Text,
 } from 'react-native';
+
+import GView from './lib/GView';
+import GButton from './lib/GButton';
+import GText from './lib/GText';
 
 import Carousel from './Carousel';
 import QuestionCard from './QuestionCard';
@@ -18,9 +19,14 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
   },
-  leaveButton: {
+  leaveButtonView: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
   carousel: {
     flex: 1,
@@ -68,27 +74,34 @@ export default class extends Component {
     ));
     questionViews.push(
       <QuestionCardEnd
+        prev={this.prevSlide}
         onEnd={onEnd}
       />,
     );
 
+    const slideCounter = currentDeckSlide + 1 < questions.length
+      ? currentDeckSlide + 1
+      : questions.length;
+
     return (
-      <View style={styles.outer}>
-        <View style={styles.header}>
-          <Text>{currentDeckSlide + 1}/{questions.length}</Text>
-          <Button
-            style={styles.leaveButton}
+      <GView style={styles.outer}>
+        <GView style={styles.header} pad>
+          <GView />
+          <GText>{slideCounter}/{questions.length}</GText>
+          <GButton
+            type="secondary"
+            viewStyle={styles.leaveButtonView}
             title="X"
             onPress={onEnd}
           />
-        </View>
+        </GView>
         <Carousel
           style={styles.carousel}
           slides={questionViews}
           currentSlideIndex={currentDeckSlide}
           onSlideScroll={this.onSlideScroll}
         />
-      </View>
+      </GView>
     );
   }
 }

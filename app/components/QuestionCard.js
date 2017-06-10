@@ -1,15 +1,22 @@
 
 import React, { Component, PropTypes } from 'react';
 import {
-  Text,
-  View,
   StyleSheet,
 } from 'react-native';
 
-import GButton from './GButton';
+import GButton from './lib/GButton';
+import GText from './lib/GText';
+import GView from './lib/GView';
+import GSvg from './lib/GSvg';
+
+import icons from '../icons';
+
+import {
+  body,
+} from '../constants/baseStyles';
 
 const styles = StyleSheet.create({
-  outer: {
+  outter: {
     flex: 1,
     flexGrow: 1,
     position: 'relative',
@@ -18,7 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'stretch',
 
     borderRadius: 30,
@@ -46,9 +52,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  copy: {
-    fontSize: 20,
-  },
+  copy: body,
   left: {
     alignSelf: 'flex-start',
   },
@@ -56,14 +60,16 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   pageButtonView: {},
-  pageButtonText: {
-    fontSize: 60,
+  pageButtonText: {},
+  icon: {
+    // color: '#000',
   },
 });
 
 export default class extends Component {
   static propTypes = {
     copy: PropTypes.string.isRequired,
+    icon: PropTypes.any,
     next: PropTypes.func.isRequired,
     prev: PropTypes.func.isRequired,
     isFirst: PropTypes.bool.isRequired,
@@ -77,12 +83,14 @@ export default class extends Component {
       isFirst,
       isLast,
       copy,
+      icon,
     } = this.props;
 
     const prevButton = !isFirst && (
       <GButton
         title="<"
         onPress={prev}
+        type="secondary"
         textStyle={styles.pageButtonText}
         viewStyle={styles.pageButtonView}
       />
@@ -91,30 +99,34 @@ export default class extends Component {
       <GButton
         title=">"
         onPress={next}
+        type="secondary"
         textStyle={styles.pageButtonText}
         viewStyle={styles.pageButtonView}
       />
     );
 
     return (
-      <View style={styles.outer} >
-        <View style={styles.shadow} />
-        <View style={styles.contentContainer} >
-          <View style={styles.copyContainer}>
-            <Text style={styles.copy}>
+      <GView style={styles.outter} >
+        <GView style={styles.shadow} />
+        <GView style={styles.contentContainer} >
+          <GView horizontal centerContents>
+            {icon && (<GSvg svgXmlData={icons[icon]} />)}
+          </GView>
+          <GView style={styles.copyContainer}>
+            <GText subheadline>
               {copy}
-            </Text>
-          </View>
-          <View style={styles.footer}>
-            <View style={styles.left}>
+            </GText>
+          </GView>
+          <GView style={styles.footer}>
+            <GView style={styles.left}>
               {prevButton}
-            </View>
-            <View style={styles.right}>
+            </GView>
+            <GView style={styles.right}>
               {nextButton}
-            </View>
-          </View>
-        </View>
-      </View>
+            </GView>
+          </GView>
+        </GView>
+      </GView>
     );
   }
 }

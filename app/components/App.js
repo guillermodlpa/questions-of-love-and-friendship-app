@@ -3,8 +3,9 @@ import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
 } from 'react-native';
+
+import GView from './lib/GView';
 
 import WelcomeView from './WelcomeView';
 import OnboardingView from './OnboardingView';
@@ -20,6 +21,7 @@ import questionsData from '../data/questions';
 const styles = StyleSheet.create({
   app: {
     flex: 1,
+    width: '100%',
     paddingTop: 30,
     paddingBottom: 30,
     paddingLeft: 10,
@@ -45,20 +47,15 @@ export default class App extends Component {
     };
   }
 
-  constructor(props) {
-    super(props);
-    this.goDeckView = this.goDeckView.bind(this);
-    this.goWelcomeView = this.goWelcomeView.bind(this);
-  }
-
   componentDidMount() {
     this.props.setQuestions(questionsData);
   }
 
-  goDeckView = () => {
+  goToDeckView = () => {
+    this.props.setCurrentDeckSlide(0);
     this.props.setActiveView(DECK);
   }
-  goWelcomeView = () => {
+  goToWelcomeView = () => {
     this.props.setActiveView(WELCOME);
   }
 
@@ -74,7 +71,7 @@ export default class App extends Component {
       case WELCOME:
         view = (
           <WelcomeView
-            onStart={this.goDeckView}
+            onStart={this.goToDeckView}
           />
         );
         break;
@@ -89,7 +86,7 @@ export default class App extends Component {
         view = (
           <DeckView
             questions={questions}
-            onEnd={this.goWelcomeView}
+            onEnd={this.goToWelcomeView}
             setCurrentDeckSlide={this.props.setCurrentDeckSlide}
             currentDeckSlide={this.props.currentDeckSlide}
           />
@@ -105,11 +102,11 @@ export default class App extends Component {
     }
 
     return (
-      <View
+      <GView
         style={styles.app}
       >
         {view}
-      </View>
+      </GView>
     );
   }
 }
