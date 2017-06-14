@@ -8,38 +8,42 @@ import {
 import {
   headline,
   subheadline,
+  body,
 } from '../../constants/baseStyles';
 
 const styles = StyleSheet.create({
-  text: {},
+  defaults: {},
   txtC: {
     textAlign: 'center',
   },
   headline,
   subheadline,
+  body,
 });
 
 export default class extends Component {
   static propTypes = {
     txtC: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-    headline: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-    subheadline: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+    type: PropTypes.string,
     children: PropTypes.any, // eslint-disable-line react/forbid-prop-types
     style: PropTypes.any, // eslint-disable-line react/forbid-prop-types
   }
   static defaultProps = {
     txtC: false,
-    headline: false,
-    subheadline: false,
+    type: 'body',
     children: [],
     style: null,
   }
 
   render() {
-    const style = [styles.view, this.props.style];
+    const style = [styles.defaults, this.props.style];
+
+    if (this.props.type) {
+      style.push(styles[this.props.type]);
+    }
 
     Object.keys(this.props).forEach((prop) => {
-      if (styles[prop]) {
+      if (this.props[prop]) {
         style.push(styles[prop]);
       }
     });

@@ -61,19 +61,20 @@ const styles = StyleSheet.create({
   },
   pageButtonView: {},
   pageButtonText: {},
-  icon: {
-    // color: '#000',
-  },
 });
 
 export default class extends Component {
   static propTypes = {
     copy: PropTypes.string.isRequired,
-    icon: PropTypes.any,
+    icon: PropTypes.string,
     next: PropTypes.func.isRequired,
     prev: PropTypes.func.isRequired,
     isFirst: PropTypes.bool.isRequired,
     isLast: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    icon: null,
   }
 
   render() {
@@ -113,7 +114,7 @@ export default class extends Component {
             {icon && (<GSvg svgXmlData={icons[icon]} />)}
           </GView>
           <GView style={styles.copyContainer}>
-            <GText subheadline>
+            <GText type="subheadline">
               {copy}
             </GText>
           </GView>

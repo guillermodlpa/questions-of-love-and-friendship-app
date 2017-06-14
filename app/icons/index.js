@@ -32,6 +32,7 @@ import thumbsUp from './svg/thumbsUp.js';
 import serious from './svg/serious.js';
 import burningHome from './svg/burningHome.js';
 import mother from './svg/mother.js';
+import loveQuestion from './svg/loveQuestion.js';
 
 export default {
   dinner,
@@ -67,4 +68,5 @@ export default {
   serious,
   burningHome,
   mother,
+  loveQuestion,
 };

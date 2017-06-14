@@ -4,6 +4,12 @@ import {
   ACTIVE_VIEW_CHANGED,
   QUESTIONS_LOADED,
   CURRENT_DECK_SLIDE_CHANGED,
+  OPEN_SET_PICKER_MODAL,
+  CLOSE_SET_PICKER_MODAL,
+  OPEN_ATTRIBUTIONS_MODAL,
+  CLOSE_ATTRIBUTIONS_MODAL,
+  OPEN_STUDY_DETAIL_MODAL,
+  CLOSE_STUDY_DETAIL_MODAL,
 } from '../constants/actionTypes';
 import { WELCOME } from '../constants/viewNames';
 
@@ -19,6 +25,39 @@ const currentDeckSlide = (state = 0, action) => (
   action.type === CURRENT_DECK_SLIDE_CHANGED ? action.value : state
 );
 
+const setPickerModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case OPEN_SET_PICKER_MODAL:
+      return true;
+    case CLOSE_SET_PICKER_MODAL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const attributionsModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case OPEN_ATTRIBUTIONS_MODAL:
+      return true;
+    case CLOSE_ATTRIBUTIONS_MODAL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const studyDetailsModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case OPEN_STUDY_DETAIL_MODAL:
+      return true;
+    case CLOSE_STUDY_DETAIL_MODAL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 /**
  * Combined Reducers
  * =================
@@ -32,4 +71,7 @@ export default combineReducers({
   activeView,
   questions,
   currentDeckSlide,
+  setPickerModalOpen,
+  attributionsModalOpen,
+  studyDetailsModalOpen,
 });

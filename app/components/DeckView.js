@@ -19,14 +19,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
-  },
-  leaveButtonView: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
   },
   carousel: {
     flex: 1,
@@ -85,15 +78,15 @@ export default class extends Component {
 
     return (
       <GView style={styles.outer}>
-        <GView style={styles.header} pad>
-          <GView />
-          <GText>{slideCounter}/{questions.length}</GText>
+        <GView style={styles.header} padded spread>
           <GButton
-            type="secondary"
-            viewStyle={styles.leaveButtonView}
-            title="X"
+            type="text"
+            title="<"
             onPress={onEnd}
           />
+          <GText>
+            {slideCounter}/{questions.length}
+          </GText>
         </GView>
         <Carousel
           style={styles.carousel}

@@ -1,12 +1,12 @@
 
 import React, { Component, PropTypes } from 'react';
 import {
-  Text,
   StyleSheet,
 } from 'react-native';
 
 import GButton from './lib/GButton';
 import GView from './lib/GView';
+import GText from './lib/GText';
 import {
   headline,
   body,
@@ -34,22 +34,22 @@ export default class extends Component {
   render() {
     return (
       <GView style={styles.outter}>
-        <GView pad>
-          <Text style={styles.headline}>
+        <GView padded>
+          <GText style={styles.headline} txtC>
             Done!
-          </Text>
+          </GText>
         </GView>
-        <GView pad>
+        <GView padded>
           <GButton
             type="secondary"
             title="< Go Back"
             onPress={this.props.prev}
+            spaced
           />
-        </GView>
-        <GView pad>
           <GButton
             title="Finish"
             onPress={this.props.onEnd}
+            spaced
           />
         </GView>
       </GView>

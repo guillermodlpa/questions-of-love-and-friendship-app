@@ -15,6 +15,8 @@ import {
   buttonBorderColorSecondary,
   buttonBorderRadius,
   paddingM,
+  paddingS,
+  subheadlineFontSize,
 } from '../../constants/baseStyles';
 
 const baseWrapperStyles = {
@@ -25,25 +27,42 @@ const baseWrapperStyles = {
   borderWidth: 1,
 };
 
-const primaryStyles = StyleSheet.create({
-  wrapper: Object.assign({}, baseWrapperStyles, {
-    backgroundColor: buttonBackgroundColor,
-    borderColor: buttonBorderColor,
+const typedStyles = {
+  primary: StyleSheet.create({
+    wrapper: Object.assign({}, baseWrapperStyles, {
+      backgroundColor: buttonBackgroundColor,
+      borderColor: buttonBorderColor,
+    }),
+    text: {
+      color: buttonColor,
+      fontSize: subheadlineFontSize,
+    },
   }),
-  text: {
-    color: buttonColor,
-  },
-});
+  secondary: StyleSheet.create({
+    wrapper: Object.assign({}, baseWrapperStyles, {
+      backgroundColor: buttonBackgroundColorSecondary,
+      borderColor: buttonBorderColorSecondary,
+    }),
+    text: {
+      color: buttonColorSecondary,
+      fontSize: subheadlineFontSize,
+    },
+  }),
+  text: StyleSheet.create({
+    wrapper: Object.assign({}, baseWrapperStyles, {
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      padding: 0,
+    }),
+    text: {
+      color: buttonColorSecondary,
+    },
+  }),
+};
 
-const secondaryStyles = StyleSheet.create({
-  wrapper: Object.assign({}, baseWrapperStyles, {
-    backgroundColor: buttonBackgroundColorSecondary,
-    borderColor: buttonBorderColorSecondary,
-  }),
-  text: {
-    color: buttonColorSecondary,
-  },
-});
+function pickStylesFromType(type) {
+  return typedStyles[type] || typedStyles.primary;
+}
 
 export default class extends Component {
   static propTypes = {
@@ -52,12 +71,14 @@ export default class extends Component {
     viewStyle: PropTypes.any, // eslint-disable-line react/forbid-prop-types
     textStyle: PropTypes.any, // eslint-disable-line react/forbid-prop-types
     type: PropTypes.string,
+    spaced: PropTypes.bool,
   }
   static defaultProps = {
     onPress: () => {},
     viewStyle: null,
     textStyle: null,
     type: 'primary',
+    spaced: false,
   }
 
   render() {
@@ -67,12 +88,15 @@ export default class extends Component {
       onPress,
       title,
       type,
+      spaced,
     } = this.props;
 
-    const thisStyles = type === 'secondary' ? secondaryStyles : primaryStyles;
+    const thisStyles = pickStylesFromType(type);
+
+    const marginStyles = spaced ? { margin: paddingS } : null;
 
     return (
-      <TouchableHighlight onPress={onPress} style={[thisStyles.wrapper, viewStyle]}>
+      <TouchableHighlight onPress={onPress} style={[thisStyles.wrapper, marginStyles, viewStyle]}>
         <Text style={[thisStyles.text, textStyle]}>
           {title}
         </Text>
