@@ -43,6 +43,7 @@ export const modalOvelay = {
 export const headline = {
   fontSize: headlineFontSize,
   color: bodyColor,
+  fontWeight: 'bold',
 };
 
 export const body = {

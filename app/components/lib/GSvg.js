@@ -67,8 +67,6 @@ export default class extends Component {
       replaceColors(html, colors[0], colors[1]) :
       html;
 
-    console.log(coloredHtml);
-
     return (
       <View style={[styles[size], style]}>
         <WebView

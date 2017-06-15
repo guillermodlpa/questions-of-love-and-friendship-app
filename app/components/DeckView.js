@@ -3,12 +3,13 @@ import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
 } from 'react-native';
+import DeckSwiper from 'react-native-deck-swiper';
 
 import GView from './lib/GView';
 import GButton from './lib/GButton';
 import GText from './lib/GText';
 
-import Carousel from './Carousel';
+// import Carousel from './Carousel';
 import QuestionCard from './QuestionCard';
 import QuestionCardEnd from './QuestionCardEnd';
 
@@ -49,6 +50,16 @@ export default class extends Component {
     this.props.setCurrentDeckSlide(index);
   }
 
+  renderQuestionCard = question => (
+    <QuestionCard
+      next={this.nextSlide}
+      prev={this.prevSlide}
+      isFirst={false}
+      isLast={false}
+      {...question}
+    />
+  )
+
   render() {
     const {
       questions,
@@ -88,13 +99,20 @@ export default class extends Component {
             {slideCounter}/{questions.length}
           </GText>
         </GView>
-        <Carousel
-          style={styles.carousel}
-          slides={questionViews}
-          currentSlideIndex={currentDeckSlide}
-          onSlideScroll={this.onSlideScroll}
+        <DeckSwiper
+          cards={questions}
+          renderCard={this.renderQuestionCard}
+          onSwiped={(cardIndex) => { console.log(cardIndex); }}
+          onSwipedAll={() => { console.log('onSwipedAll'); }}
+          cardIndex={0}
         />
       </GView>
     );
+    // <Carousel
+    //   style={styles.carousel}
+    //   slides={questionViews}
+    //   currentSlideIndex={currentDeckSlide}
+    //   onSlideScroll={this.onSlideScroll}
+    // />
   }
 }

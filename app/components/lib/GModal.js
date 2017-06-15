@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import GView from './GView';
+import GAnimatedView from './GAnimatedView';
 
 import {
   paddingM,
@@ -111,7 +112,14 @@ export default class extends Component {
     return (
       <GView style={styles.wrapper}>
         {overlay}
-        <GView style={style}>
+        <GAnimatedView
+          style={style}
+          duration={150}
+          styleAnimations={{
+            opacity: { initial: 0, final: 1 },
+            marginTop: { initial: 20, final: 0 },
+          }}
+        >
           <ScrollView
             style={styles.scrollView}
             scrollEnabled={this.props.scrollEnabled}
@@ -119,7 +127,7 @@ export default class extends Component {
             {this.props.children}
           </ScrollView>
           {closeButton}
-        </GView>
+        </GAnimatedView>
       </GView>
     );
   }
