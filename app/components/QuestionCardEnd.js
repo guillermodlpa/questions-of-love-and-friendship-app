@@ -7,10 +7,6 @@ import {
 import GButton from './lib/GButton';
 import GView from './lib/GView';
 import GText from './lib/GText';
-import {
-  headline,
-  body,
-} from '../constants/baseStyles';
 
 const styles = StyleSheet.create({
   outter: {
@@ -18,8 +14,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
   },
-  headline,
-  body,
 });
 
 export default class extends Component {
@@ -35,7 +29,7 @@ export default class extends Component {
     return (
       <GView style={styles.outter}>
         <GView padded>
-          <GText style={styles.headline} txtC>
+          <GText txtC type="headline">
             Done!
           </GText>
         </GView>

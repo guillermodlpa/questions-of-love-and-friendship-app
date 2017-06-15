@@ -16,6 +16,7 @@ import {
   modalBackgroundColor,
   modalBorderColor,
   modalShadow,
+  modalOvelay,
 } from '../../constants/baseStyles';
 
 const styles = StyleSheet.create({
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    ...modalOvelay,
   },
   scrollView: {
     flex: 1,

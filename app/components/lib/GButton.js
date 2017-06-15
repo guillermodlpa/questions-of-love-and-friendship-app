@@ -13,6 +13,7 @@ import {
   buttonBackgroundColorSecondary,
   buttonBorderColor,
   buttonBorderColorSecondary,
+  buttonBorderWidth,
   buttonBorderRadius,
   paddingM,
   paddingS,
@@ -24,7 +25,10 @@ const baseWrapperStyles = {
   padding: paddingM,
   alignItems: 'center',
   justifyContent: 'center',
-  borderWidth: 1,
+  borderWidth: buttonBorderWidth,
+};
+const baseTextStyles = {
+  // fontWeight: 'bold',
 };
 
 const typedStyles = {
@@ -33,20 +37,20 @@ const typedStyles = {
       backgroundColor: buttonBackgroundColor,
       borderColor: buttonBorderColor,
     }),
-    text: {
+    text: Object.assign({}, baseTextStyles, {
       color: buttonColor,
       fontSize: subheadlineFontSize,
-    },
+    }),
   }),
   secondary: StyleSheet.create({
     wrapper: Object.assign({}, baseWrapperStyles, {
       backgroundColor: buttonBackgroundColorSecondary,
       borderColor: buttonBorderColorSecondary,
     }),
-    text: {
+    text: Object.assign({}, baseTextStyles, {
       color: buttonColorSecondary,
       fontSize: subheadlineFontSize,
-    },
+    }),
   }),
   text: StyleSheet.create({
     wrapper: Object.assign({}, baseWrapperStyles, {
@@ -54,9 +58,9 @@ const typedStyles = {
       borderColor: 'transparent',
       padding: 0,
     }),
-    text: {
+    text: Object.assign({}, baseTextStyles, {
       color: buttonColorSecondary,
-    },
+    }),
   }),
 };
 

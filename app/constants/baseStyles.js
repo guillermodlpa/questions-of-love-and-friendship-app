@@ -1,40 +1,58 @@
+/* eslint-disable no-unused-vars */
+import {
+  black,
+  white,
+  lightGrey,
+  darkGrey,
+  mainPalette,
+} from './colors';
+/* eslint-enable no-unused-vars */
+
 export const paddingS = 10;
 export const paddingM = 20;
-export const copyColor = '#000000';
+export const copyColor = black;
 
-export const appBackgroundColor = '#ffffff';
+export const appBackgroundColor = mainPalette[4];
+export const modalBackgroundColor = mainPalette[3];
+export const modalShadowColor = black;
 
-export const buttonColor = '#eeeeee';
-export const buttonBackgroundColor = '#666666';
-export const buttonBorderColor = '#000000';
-export const buttonColorSecondary = '#000000';
-export const buttonBackgroundColorSecondary = '#ffffff';
-export const buttonBorderColorSecondary = '#000000';
-export const buttonBorderRadius = 5;
+export const bodyColor = black;
 
-export const modalBackgroundColor = appBackgroundColor;
+export const buttonColor = white;
+export const buttonBackgroundColor = mainPalette[0];
+export const buttonBorderColor = black;
+export const buttonColorSecondary = white;
+export const buttonBackgroundColorSecondary = mainPalette[1];
+export const buttonBorderColorSecondary = black;
+export const buttonBorderWidth = 0;
+export const buttonBorderRadius = 0;
 
-export const copyFontSize = 15;
-export const subheadlineFontSize = 18;
-export const headlineFontSize = 20;
+export const copyFontSize = 16;
+export const subheadlineFontSize = 19;
+export const headlineFontSize = 25;
 
-export const modalShadow = {
-  shadowColor: '#000000',
-  shadowOpacity: 0.5,
-  shadowRadius: 10,
-  shadowOffset: { width: 5, height: 5 },
+export const deckBackgroundColor = mainPalette[4];
+export const cardBackgroundColor = mainPalette[1];
+export const cardBorderColor = mainPalette[0];
+
+export const modalShadow = {};
+export const modalOvelay = {
+  backgroundColor: mainPalette[4],
 };
 
 export const headline = {
   fontSize: headlineFontSize,
+  color: bodyColor,
 };
 
 export const body = {
   fontSize: copyFontSize,
   paddingBottom: paddingM,
+  color: bodyColor,
 };
 
 export const subheadline = {
   fontSize: subheadlineFontSize,
   paddingBottom: paddingM,
+  color: bodyColor,
 };

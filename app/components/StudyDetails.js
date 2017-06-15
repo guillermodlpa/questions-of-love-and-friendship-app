@@ -27,7 +27,6 @@ export default class extends Component {
             TODO
           </GText>
           <GButton
-            type="secondary"
             title="Go to Original Paper"
             onPress={this.openStudyLink}
           />

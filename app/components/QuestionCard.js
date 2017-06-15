@@ -13,6 +13,9 @@ import icons from '../icons';
 
 import {
   body,
+  paddingM,
+  cardBackgroundColor,
+  cardBorderColor,
 } from '../constants/baseStyles';
 
 const styles = StyleSheet.create({
@@ -29,9 +32,9 @@ const styles = StyleSheet.create({
 
     borderRadius: 30,
     borderWidth: 10,
-    borderColor: '#adadad',
+    borderColor: cardBorderColor,
     padding: 20,
-    backgroundColor: '#ffffff',
+    backgroundColor: cardBackgroundColor,
   },
   shadow: {
     flex: 1,
@@ -45,6 +48,7 @@ const styles = StyleSheet.create({
   },
   copyContainer: {
     flexGrow: 1,
+    paddingTop: paddingM,
   },
   footer: {
     width: '100%',
@@ -114,7 +118,7 @@ export default class extends Component {
             {icon && (<GSvg svgXmlData={icons[icon]} />)}
           </GView>
           <GView style={styles.copyContainer}>
-            <GText type="subheadline">
+            <GText type="subheadline" txtC>
               {copy}
             </GText>
           </GView>

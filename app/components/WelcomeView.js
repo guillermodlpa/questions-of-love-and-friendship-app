@@ -11,6 +11,10 @@ import GSvg from './lib/GSvg';
 
 import icons from '../icons';
 
+import {
+  appBackgroundColor,
+} from '../constants/baseStyles';
+
 const styles = StyleSheet.create({
   main: {
     flex: 1,
@@ -45,7 +49,11 @@ export default class App extends Component {
               Questions of Love and Friendship
             </GText>
             <GView padded>
-              <GSvg svgXmlData={icons.loveQuestion} />
+              <GSvg
+                svgXmlData={icons.loveQuestion}
+                size="big"
+                colors={['#ffffff', appBackgroundColor]}
+              />
             </GView>
           </GView>
         </GView>
