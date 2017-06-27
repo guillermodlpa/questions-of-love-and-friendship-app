@@ -17,12 +17,17 @@ const styles = StyleSheet.create({
   outer: {
     flex: 1,
     flexGrow: 1,
+    position: 'relative',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   carousel: {
+    flex: 1,
+    flexGrow: 1,
+  },
+  swiperContainer: {
     flex: 1,
     flexGrow: 1,
   },
@@ -41,6 +46,24 @@ export default class extends Component {
   onSlideScroll = (slideIndex) => {
     this.props.setCurrentDeckSlide(slideIndex);
   }
+
+  onSwiped = (cardIndex) => {
+    this.props.setCurrentDeckSlide(cardIndex + 1);
+  }
+  onBack = () => {
+    if (this.props.currentDeckSlide === 0) {
+      this.props.onEnd();
+    } else if (this.deckSwiperRef) {
+      this.deckSwiperRef.swipeBack((previousCardIndex) => {
+        this.props.setCurrentDeckSlide(previousCardIndex - 1);
+      });
+    }
+  }
+
+  setDeckSwiperRef = (ref) => {
+    this.deckSwiperRef = ref;
+  }
+
   nextSlide = () => {
     const index = this.props.currentDeckSlide + 1;
     this.props.setCurrentDeckSlide(index);
@@ -93,19 +116,25 @@ export default class extends Component {
           <GButton
             type="text"
             title="<"
-            onPress={onEnd}
+            onPress={this.onBack}
           />
           <GText>
             {slideCounter}/{questions.length}
           </GText>
         </GView>
-        <DeckSwiper
-          cards={questions}
-          renderCard={this.renderQuestionCard}
-          onSwiped={(cardIndex) => { console.log(cardIndex); }}
-          onSwipedAll={() => { console.log('onSwipedAll'); }}
-          cardIndex={0}
-        />
+        <GView style={styles.swiperContainer}>
+          <DeckSwiper
+            ref={this.setDeckSwiperRef}
+            cards={questions}
+            renderCard={this.renderQuestionCard}
+            onSwiped={this.onSwiped}
+            cardIndex={0}
+            backgroundColor={'transparent'}
+            previousCardInitialPositionX={-500}
+            previousCardInitialPositionY={0}
+            secondCardZoom={0.97}
+          />
+        </GView>
       </GView>
     );
     // <Carousel

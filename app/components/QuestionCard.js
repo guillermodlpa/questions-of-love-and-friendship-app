@@ -16,13 +16,17 @@ import {
   paddingM,
   cardBackgroundColor,
   cardBorderColor,
+  cardDeckShadowBorderColor,
 } from '../constants/baseStyles';
 
 const styles = StyleSheet.create({
   outter: {
-    flex: 1,
     flexGrow: 1,
     position: 'relative',
+    marginLeft: 0,
+    marginRight: 20,
+    marginTop: 0,
+    marginBottom: 70,
   },
   contentContainer: {
     flex: 1,
@@ -43,7 +47,7 @@ const styles = StyleSheet.create({
     left: 2,
     bottom: -2,
     right: -2,
-    backgroundColor: '#555555',
+    backgroundColor: cardDeckShadowBorderColor,
     borderRadius: 30,
   },
   copyContainer: {

@@ -11,7 +11,7 @@ import {
 
 const styles = StyleSheet.create({
   defaults: {
-    borderColor: '#eee',
+    // borderColor: '#eee',
     // borderWidth: 1,
     padding: 0,
   },

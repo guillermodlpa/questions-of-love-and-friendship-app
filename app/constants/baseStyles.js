@@ -34,6 +34,7 @@ export const headlineFontSize = 25;
 export const deckBackgroundColor = mainPalette[4];
 export const cardBackgroundColor = mainPalette[1];
 export const cardBorderColor = mainPalette[0];
+export const cardDeckShadowBorderColor = mainPalette[0];
 
 export const modalShadow = {};
 export const modalOvelay = {
