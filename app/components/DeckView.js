@@ -23,10 +23,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  carousel: {
-    flex: 1,
-    flexGrow: 1,
-  },
   swiperContainer: {
     flex: 1,
     flexGrow: 1,
@@ -137,11 +133,5 @@ export default class extends Component {
         </GView>
       </GView>
     );
-    // <Carousel
-    //   style={styles.carousel}
-    //   slides={questionViews}
-    //   currentSlideIndex={currentDeckSlide}
-    //   onSlideScroll={this.onSlideScroll}
-    // />
   }
 }
