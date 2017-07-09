@@ -13,6 +13,8 @@ import GText from './lib/GText';
 import QuestionCard from './QuestionCard';
 import QuestionCardEnd from './QuestionCardEnd';
 
+import { noop, log } from '../utils';
+
 const styles = StyleSheet.create({
   outer: {
     flex: 1,
@@ -47,12 +49,14 @@ export default class extends Component {
     this.props.setCurrentDeckSlide(cardIndex + 1);
   }
   onBack = () => {
-    if (this.props.currentDeckSlide === 0) {
+    log('DeckView', 'onBack', this.props.currentDeckSlide);
+    const currentDeckSlide = this.props.currentDeckSlide;
+
+    if (currentDeckSlide === 0) {
       this.props.onEnd();
     } else if (this.deckSwiperRef) {
-      this.deckSwiperRef.swipeBack((previousCardIndex) => {
-        this.props.setCurrentDeckSlide(previousCardIndex - 1);
-      });
+      this.deckSwiperRef.jumpToCardIndex(currentDeckSlide - 1);
+      this.props.setCurrentDeckSlide(currentDeckSlide - 1);
     }
   }
 
@@ -60,23 +64,17 @@ export default class extends Component {
     this.deckSwiperRef = ref;
   }
 
-  nextSlide = () => {
-    const index = this.props.currentDeckSlide + 1;
-    this.props.setCurrentDeckSlide(index);
-  }
-  prevSlide = () => {
-    const index = this.props.currentDeckSlide - 1;
-    this.props.setCurrentDeckSlide(index);
-  }
+  // nextSlide = () => {
+  //   const index = this.props.currentDeckSlide + 1;
+  //   this.props.setCurrentDeckSlide(index);
+  // }
+  // prevSlide = () => {
+  //   const index = this.props.currentDeckSlide - 1;
+  //   this.props.setCurrentDeckSlide(index);
+  // }
 
   renderQuestionCard = question => (
-    <QuestionCard
-      next={this.nextSlide}
-      prev={this.prevSlide}
-      isFirst={false}
-      isLast={false}
-      {...question}
-    />
+    <QuestionCard {...question} />
   )
 
   render() {
@@ -86,25 +84,11 @@ export default class extends Component {
       currentDeckSlide,
     } = this.props;
 
-    const questionViews = questions.map((question, index) => (
-      <QuestionCard
-        next={this.nextSlide}
-        prev={this.prevSlide}
-        isFirst={index === 0}
-        isLast={false}
-        {...question}
-      />
-    ));
-    questionViews.push(
-      <QuestionCardEnd
-        prev={this.prevSlide}
-        onEnd={onEnd}
-      />,
-    );
-
     const slideCounter = currentDeckSlide + 1 < questions.length
       ? currentDeckSlide + 1
       : questions.length;
+
+    const afterLast = currentDeckSlide + 1 > questions.length;
 
     return (
       <GView style={styles.outer}>
@@ -124,12 +108,23 @@ export default class extends Component {
             cards={questions}
             renderCard={this.renderQuestionCard}
             onSwiped={this.onSwiped}
+            onSwipedLeft={noop}
+            onSwipedRight={noop}
+            onSwipedTop={noop}
+            onSwipedBottom={noop}
+            onSwipedAll={noop}
             cardIndex={0}
             backgroundColor={'transparent'}
             previousCardInitialPositionX={-500}
             previousCardInitialPositionY={0}
             secondCardZoom={0.97}
           />
+          {afterLast && (
+            <QuestionCardEnd
+              onBack={this.onBack}
+              onEnd={onEnd}
+            />
+          )}
         </GView>
       </GView>
     );

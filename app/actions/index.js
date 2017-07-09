@@ -10,41 +10,70 @@ import {
   CLOSE_STUDY_DETAIL_MODAL,
 } from '../constants/actionTypes';
 
-export const setActiveView = value => ({
-  type: ACTIVE_VIEW_CHANGED,
-  value,
-});
+import { log } from '../utils';
 
-export const setQuestions = questions => ({
-  type: QUESTIONS_LOADED,
-  questions,
-});
+export const setActiveView = (value) => {
+  log('actions', 'setActiveView', value);
+  return {
+    type: ACTIVE_VIEW_CHANGED,
+    value,
+  };
+};
 
-export const setCurrentDeckSlide = value => ({
-  type: CURRENT_DECK_SLIDE_CHANGED,
-  value,
-});
+export const setQuestions = (questions) => {
+  log('actions', 'setQuestions', questions);
+  return {
+    type: QUESTIONS_LOADED,
+    questions,
+  };
+};
 
-export const openSetPickerModal = () => ({
-  type: OPEN_SET_PICKER_MODAL,
-});
+export const setCurrentDeckSlide = (value) => {
+  log('actions', 'setCurrentDeckSlide', value);
+  return {
+    type: CURRENT_DECK_SLIDE_CHANGED,
+    value,
+  };
+};
 
-export const closeSetPickerModal = () => ({
-  type: CLOSE_SET_PICKER_MODAL,
-});
+export const openSetPickerModal = () => {
+  log('actions', 'openSetPickerModal');
+  return {
+    type: OPEN_SET_PICKER_MODAL,
+  };
+};
 
-export const openAttributionsModal = () => ({
-  type: OPEN_ATTRIBUTIONS_MODAL,
-});
+export const closeSetPickerModal = () => {
+  log('actions', 'closeSetPickerModal');
+  return {
+    type: CLOSE_SET_PICKER_MODAL,
+  };
+};
 
-export const closeAttributionsModal = () => ({
-  type: CLOSE_ATTRIBUTIONS_MODAL,
-});
+export const openAttributionsModal = () => {
+  log('actions', 'openAttributionsModal');
+  return {
+    type: OPEN_ATTRIBUTIONS_MODAL,
+  };
+};
 
-export const openStudyDetailModal = () => ({
-  type: OPEN_STUDY_DETAIL_MODAL,
-});
+export const closeAttributionsModal = () => {
+  log('actions', 'closeAttributionsModal');
+  return {
+    type: CLOSE_ATTRIBUTIONS_MODAL,
+  };
+};
 
-export const closeStudyDetailModal = () => ({
-  type: CLOSE_STUDY_DETAIL_MODAL,
-});
+export const openStudyDetailModal = () => {
+  log('actions', 'openStudyDetailModal');
+  return {
+    type: OPEN_STUDY_DETAIL_MODAL,
+  };
+};
+
+export const closeStudyDetailModal = () => {
+  log('actions', 'closeStudyDetailModal');
+  return {
+    type: CLOSE_STUDY_DETAIL_MODAL,
+  };
+};

@@ -4,7 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import GButton from './lib/GButton';
+// import GButton from './lib/GButton';
 import GText from './lib/GText';
 import GView from './lib/GView';
 import GSvg from './lib/GSvg';
@@ -75,10 +75,10 @@ export default class extends Component {
   static propTypes = {
     copy: PropTypes.string.isRequired,
     icon: PropTypes.string,
-    next: PropTypes.func.isRequired,
-    prev: PropTypes.func.isRequired,
-    isFirst: PropTypes.bool.isRequired,
-    isLast: PropTypes.bool.isRequired,
+    // next: PropTypes.func.isRequired,
+    // prev: PropTypes.func.isRequired,
+    // isFirst: PropTypes.bool.isRequired,
+    // isLast: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -87,32 +87,32 @@ export default class extends Component {
 
   render() {
     const {
-      next,
-      prev,
-      isFirst,
-      isLast,
+      // next,
+      // prev,
+      // isFirst,
+      // isLast,
       copy,
       icon,
     } = this.props;
 
-    const prevButton = !isFirst && (
-      <GButton
-        title="<"
-        onPress={prev}
-        type="secondary"
-        textStyle={styles.pageButtonText}
-        viewStyle={styles.pageButtonView}
-      />
-    );
-    const nextButton = !isLast && (
-      <GButton
-        title=">"
-        onPress={next}
-        type="secondary"
-        textStyle={styles.pageButtonText}
-        viewStyle={styles.pageButtonView}
-      />
-    );
+    // const prevButton = !isFirst && (
+    //   <GButton
+    //     title="<"
+    //     onPress={prev}
+    //     type="secondary"
+    //     textStyle={styles.pageButtonText}
+    //     viewStyle={styles.pageButtonView}
+    //   />
+    // );
+    // const nextButton = !isLast && (
+    //   <GButton
+    //     title=">"
+    //     onPress={next}
+    //     type="secondary"
+    //     textStyle={styles.pageButtonText}
+    //     viewStyle={styles.pageButtonView}
+    //   />
+    // );
 
     return (
       <GView style={styles.outter} >
@@ -125,14 +125,6 @@ export default class extends Component {
             <GText type="subheadline" txtC>
               {copy}
             </GText>
-          </GView>
-          <GView style={styles.footer}>
-            <GView style={styles.left}>
-              {prevButton}
-            </GView>
-            <GView style={styles.right}>
-              {nextButton}
-            </GView>
           </GView>
         </GView>
       </GView>

@@ -22,7 +22,7 @@ export default class extends Component {
   }
   static propTypes = {
     onEnd: PropTypes.func.isRequired,
-    prev: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
   }
 
   render() {
@@ -37,7 +37,7 @@ export default class extends Component {
           <GButton
             type="secondary"
             title="< Go Back"
-            onPress={this.props.prev}
+            onPress={this.props.onBack}
             spaced
           />
           <GButton
