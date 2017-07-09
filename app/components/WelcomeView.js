@@ -52,7 +52,7 @@ export default class App extends Component {
               <GSvg
                 svgXmlData={icons.loveQuestion}
                 size="big"
-                colors={['#ffffff', appBackgroundColor]}
+                backgroundColor={appBackgroundColor}
               />
             </GView>
           </GView>

@@ -4,7 +4,6 @@ import {
   StyleSheet,
 } from 'react-native';
 
-// import GButton from './lib/GButton';
 import GText from './lib/GText';
 import GView from './lib/GView';
 import GSvg from './lib/GSvg';
@@ -17,6 +16,9 @@ import {
   cardBackgroundColor,
   cardBorderColor,
   cardDeckShadowBorderColor,
+  cardBorderRadius,
+  cardBorderWidth,
+  cardDeckShadowOpacity,
 } from '../constants/baseStyles';
 
 const styles = StyleSheet.create({
@@ -34,8 +36,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'stretch',
 
-    borderRadius: 30,
-    borderWidth: 10,
+    borderRadius: cardBorderRadius,
+    borderWidth: cardBorderWidth,
     borderColor: cardBorderColor,
     padding: 20,
     backgroundColor: cardBackgroundColor,
@@ -43,12 +45,13 @@ const styles = StyleSheet.create({
   shadow: {
     flex: 1,
     position: 'absolute',
-    top: 2,
-    left: 2,
-    bottom: -2,
-    right: -2,
+    top: 3,
+    left: 3,
+    bottom: -3,
+    right: -3,
+    opacity: cardDeckShadowOpacity,
     backgroundColor: cardDeckShadowBorderColor,
-    borderRadius: 30,
+    borderRadius: cardBorderRadius,
   },
   copyContainer: {
     flexGrow: 1,
@@ -75,10 +78,6 @@ export default class extends Component {
   static propTypes = {
     copy: PropTypes.string.isRequired,
     icon: PropTypes.string,
-    // next: PropTypes.func.isRequired,
-    // prev: PropTypes.func.isRequired,
-    // isFirst: PropTypes.bool.isRequired,
-    // isLast: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -87,39 +86,21 @@ export default class extends Component {
 
   render() {
     const {
-      // next,
-      // prev,
-      // isFirst,
-      // isLast,
       copy,
       icon,
     } = this.props;
-
-    // const prevButton = !isFirst && (
-    //   <GButton
-    //     title="<"
-    //     onPress={prev}
-    //     type="secondary"
-    //     textStyle={styles.pageButtonText}
-    //     viewStyle={styles.pageButtonView}
-    //   />
-    // );
-    // const nextButton = !isLast && (
-    //   <GButton
-    //     title=">"
-    //     onPress={next}
-    //     type="secondary"
-    //     textStyle={styles.pageButtonText}
-    //     viewStyle={styles.pageButtonView}
-    //   />
-    // );
 
     return (
       <GView style={styles.outter} >
         <GView style={styles.shadow} />
         <GView style={styles.contentContainer} >
           <GView horizontal centerContents>
-            {icon && (<GSvg svgXmlData={icons[icon]} />)}
+            {icon && (
+              <GSvg
+                svgXmlData={icons[icon]}
+                backgroundColor={cardBackgroundColor}
+              />
+            )}
           </GView>
           <GView style={styles.copyContainer}>
             <GText type="subheadline" txtC>

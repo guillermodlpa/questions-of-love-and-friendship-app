@@ -18,6 +18,7 @@ import {
   modalBorderColor,
   modalShadow,
   modalOvelay,
+  modalBorderRadius,
 } from '../../constants/baseStyles';
 
 const styles = StyleSheet.create({
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     bottom: paddingM,
     backgroundColor: modalBackgroundColor,
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: modalBorderRadius,
     borderWidth: 1,
     borderColor: modalBorderColor,
     ...modalShadow,

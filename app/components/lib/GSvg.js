@@ -35,8 +35,12 @@ const lastHtml = `
   </html>
 `;
 
-function replaceColors(string, foregroundColor, backgroundColor) {
-  return string.replace(/#000000/i, foregroundColor).replace(/#ffffff/i, backgroundColor);
+function replaceForegroundColor(string, color) {
+  return string.replace(/#000000/i, color);
+}
+
+function replaceBackgroundColor(string, color) {
+  return string.replace(/#ffffff/i, color);
 }
 
 export default class extends Component {
@@ -44,13 +48,14 @@ export default class extends Component {
     style: PropTypes.any, // eslint-disable-line react/forbid-prop-types
     svgXmlData: PropTypes.string.isRequired,
     size: PropTypes.string,
-    colors: PropTypes.arrayOf(PropTypes.string),
+    foregroundColor: PropTypes.string,
+    backgroundColor: PropTypes.string,
   }
   static defaultProps = {
     style: null,
+    foregroundColor: null,
     backgroundColor: null,
     size: 'medium',
-    colors: null,
   }
 
   render() {
@@ -58,20 +63,24 @@ export default class extends Component {
       size,
       svgXmlData,
       style,
-      colors,
+      foregroundColor,
+      backgroundColor,
     } = this.props;
 
-    const html = `${firstHtml}${svgXmlData}${lastHtml}`;
+    let html = `${firstHtml}${svgXmlData}${lastHtml}`;
 
-    const coloredHtml = colors ?
-      replaceColors(html, colors[0], colors[1]) :
-      html;
+    if (foregroundColor) {
+      html = replaceForegroundColor(html, foregroundColor);
+    }
+    if (backgroundColor) {
+      html = replaceBackgroundColor(html, backgroundColor);
+    }
 
     return (
       <View style={[styles[size], style]}>
         <WebView
           scrollEnabled={false}
-          source={{ html: coloredHtml }}
+          source={{ html }}
         />
       </View>
     );
