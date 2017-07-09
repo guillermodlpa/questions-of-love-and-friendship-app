@@ -3,10 +3,6 @@
  */
 export default [
   {
-    copy: 'Lorem Ipsum',
-    set: 1,
-  },
-  {
     copy: 'Given the choice of anyone in the world, whom would you want as a dinner guest?',
     icon: 'dinner',
     iconAttr: 'Dinner Date by Chameleon Design from the Noun Project',

@@ -36,7 +36,7 @@ export default class extends Component {
         <GView padded>
           <GButton
             type="secondary"
-            title="< Go Back"
+            title="< Go back to last one"
             onPress={this.props.onBack}
             spaced
           />
