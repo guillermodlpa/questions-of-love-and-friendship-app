@@ -11,6 +11,8 @@ import GSvg from './lib/GSvg';
 
 import icons from '../icons';
 
+import i18n from '../i18n';
+
 import {
   appBackgroundColor,
 } from '../constants/baseStyles';
@@ -46,7 +48,7 @@ export default class App extends Component {
         <GView padded centerContents>
           <GView padded alignItemsCenter>
             <GText txtC type="headline">
-              Questions of Love and Friendship
+              {i18n.t('appTitle')}
             </GText>
             <GView padded>
               <GSvg
@@ -60,19 +62,19 @@ export default class App extends Component {
         <GView padded>
           <GButton
             onPress={this.onStartButtonPress}
-            title="Start"
+            title={i18n.t('start')}
             spaced
           />
           <GButton
             type="secondary"
             onPress={this.onStudyDetailButtonPress}
-            title="About Source"
+            title={i18n.t('studyDetails.buttonLabel')}
             spaced
           />
           <GButton
             type="secondary"
             onPress={this.onAttributionsButtonPress}
-            title="Attributions"
+            title={i18n.t('attributions.buttonLabel')}
             spaced
           />
         </GView>

@@ -17,6 +17,8 @@ import DeckView from './DeckView';
 import Attributions from './Attributions';
 import StudyDetails from './StudyDetails';
 
+import i18n from '../i18n';
+
 import {
   WELCOME,
   DECK,
@@ -89,6 +91,38 @@ export default class App extends Component {
     this.props.setActiveView(WELCOME);
   }
 
+  listenAndroindBackButton() {
+    if (React.BackAndroid) {
+      const {
+        setPickerModalOpen,
+        closeSetPickerModal,
+        attributionsModalOpen,
+        closeAttributionsModal,
+        studyDetailsModalOpen,
+        closeStudyDetailModal,
+        activeView,
+      } = this.props;
+
+      if (setPickerModalOpen) {
+        closeSetPickerModal();
+      } else if (attributionsModalOpen) {
+        closeAttributionsModal();
+      } else if (studyDetailsModalOpen) {
+        closeStudyDetailModal();
+      } else if (activeView === WELCOME) {
+        // close app?
+      } else if (activeView === DECK) {
+        if (this.deckView) {
+          this.deckView.onBack();
+        }
+      }
+    }
+  }
+
+  setDeckViewRef = (ref) => {
+    this.deckView = ref;
+  }
+
   renderPickSetModal() {
     const {
       setPickerModalOpen,
@@ -104,23 +138,23 @@ export default class App extends Component {
         <GView padded grow={1}>
           <GView padded>
             <GText type="headline">
-              Choose set
+              {i18n.t('chooseSet.title')}
             </GText>
           </GView>
-          <GView centerContents grow={1}>
+          <GView>
             <GButton
               onPress={() => this.onSetPicked(1)}
-              title="Set I"
+              title={i18n.t('chooseSet.set1')}
               spaced
             />
             <GButton
               onPress={() => this.onSetPicked(2)}
-              title="Set II"
+              title={i18n.t('chooseSet.set2')}
               spaced
             />
             <GButton
               onPress={() => this.onSetPicked(3)}
-              title="Set III"
+              title={i18n.t('chooseSet.set3')}
               spaced
             />
           </GView>
@@ -196,6 +230,7 @@ export default class App extends Component {
       case DECK:
         view = (
           <DeckView
+            ref={this.setDeckViewRef}
             questions={questions}
             onEnd={this.goToWelcomeView}
             {...pick(this.props, [
@@ -209,7 +244,7 @@ export default class App extends Component {
       default:
         view = (
           <Text>
-            Shitshow
+            Error
           </Text>
         );
     }

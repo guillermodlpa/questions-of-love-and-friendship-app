@@ -56,10 +56,11 @@ const typedStyles = {
     wrapper: Object.assign({}, baseWrapperStyles, {
       backgroundColor: 'transparent',
       borderColor: 'transparent',
-      padding: 0,
+      // padding: 0,
     }),
     text: Object.assign({}, baseTextStyles, {
-      color: buttonColorSecondary,
+      color: buttonBackgroundColor,
+      fontWeight: 'bold',
     }),
   }),
 };
@@ -74,7 +75,11 @@ export default class extends Component {
     onPress: PropTypes.func,
     viewStyle: PropTypes.any, // eslint-disable-line react/forbid-prop-types
     textStyle: PropTypes.any, // eslint-disable-line react/forbid-prop-types
-    type: PropTypes.string,
+    type: PropTypes.oneOf([
+      'primary',
+      'secondary',
+      'text',
+    ]),
     spaced: PropTypes.bool,
   }
   static defaultProps = {

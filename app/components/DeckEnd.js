@@ -8,6 +8,8 @@ import GButton from './lib/GButton';
 import GView from './lib/GView';
 import GText from './lib/GText';
 
+import i18n from '../i18n';
+
 const styles = StyleSheet.create({
   outter: {
     flex: 1,
@@ -30,18 +32,18 @@ export default class extends Component {
       <GView style={styles.outter}>
         <GView padded>
           <GText txtC type="headline">
-            Done!
+            {i18n.t('deckEnd.title')}
           </GText>
         </GView>
         <GView padded>
           <GButton
             type="secondary"
-            title="< Go back to last one"
+            title={`< ${i18n.t('deckEnd.back')}`}
             onPress={this.props.onBack}
             spaced
           />
           <GButton
-            title="Finish"
+            title={i18n.t('deckEnd.finish')}
             onPress={this.props.onEnd}
             spaced
           />

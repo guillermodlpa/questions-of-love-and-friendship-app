@@ -6,6 +6,8 @@ import GText from './lib/GText';
 import GView from './lib/GView';
 import GButton from './lib/GButton';
 
+import i18n from '../i18n';
+
 export default class extends Component {
   static propTypes = {}
   static defaultProps = {}
@@ -19,15 +21,15 @@ export default class extends Component {
       <GView>
         <GView padded>
           <GText type="headline">
-            Study Details
+            {i18n.t('studyDetails.title')}
           </GText>
         </GView>
         <GView padded>
           <GText>
-            TODO
+            {i18n.t('studyDetails.content')}
           </GText>
           <GButton
-            title="Go to Original Paper"
+            title={i18n.t('studyDetails.originalPaperButtonLabel')}
             onPress={this.openStudyLink}
           />
         </GView>

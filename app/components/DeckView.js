@@ -9,9 +9,10 @@ import GView from './lib/GView';
 import GButton from './lib/GButton';
 import GText from './lib/GText';
 
-// import Carousel from './Carousel';
 import QuestionCard from './QuestionCard';
-import QuestionCardEnd from './QuestionCardEnd';
+import DeckEnd from './DeckEnd';
+
+import i18n from '../i18n';
 
 import { noop, log } from '../utils';
 
@@ -24,17 +25,21 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    zIndex: 100,
   },
   swiperContainer: {
     flex: 1,
     flexGrow: 1,
+    marginTop: -50,
   },
 });
 
 export default class extends Component {
   static propTypes = {
     questions: PropTypes.arrayOf(PropTypes.shape({
-      copy: PropTypes.string.isRequired,
+      copy: PropTypes.objectOf(
+        PropTypes.string,
+      ),
     })).isRequired,
     onEnd: PropTypes.func.isRequired,
     setCurrentDeckSlide: PropTypes.func.isRequired,
@@ -64,17 +69,11 @@ export default class extends Component {
     this.deckSwiperRef = ref;
   }
 
-  // nextSlide = () => {
-  //   const index = this.props.currentDeckSlide + 1;
-  //   this.props.setCurrentDeckSlide(index);
-  // }
-  // prevSlide = () => {
-  //   const index = this.props.currentDeckSlide - 1;
-  //   this.props.setCurrentDeckSlide(index);
-  // }
-
   renderQuestionCard = question => (
-    <QuestionCard {...question} />
+    <QuestionCard
+      icon={question.icon}
+      copy={i18n.t(`questions.${question.i18nId}`)}
+    />
   )
 
   render() {
@@ -120,7 +119,7 @@ export default class extends Component {
             secondCardZoom={0.97}
           />
           {afterLast && (
-            <QuestionCardEnd
+            <DeckEnd
               onBack={this.onBack}
               onEnd={onEnd}
             />
